@@ -1,0 +1,42 @@
+plugins {
+    id "org.jetbrains.kotlinx.kover"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+kover {
+    disabled = false
+    generateReportOnCheck = true
+    runAllTestsForProjectTask = true
+    jacocoEngineVersion.set("0.8.8")
+    coverageEngine = kotlinx.kover.api.CoverageEngine.JACOCO
+}
+
+tasks.koverMergedXmlReport {
+    enabled = true
+    xmlReportFile.set(layout.buildDirectory.file("reports/koverMerged/xml/result.xml"))
+}
+
+// NOTE: report is copied into subprojects because sonarqube searches inside subprojects (and not on the root level)
+tasks.register("copyResultToSubprojects") {
+    outputs.upToDateWhen { check.state.upToDate }
+    doLast {
+        allprojects.forEach {
+            subproj ->
+                if (subproj != rootProject) {
+                    println("copying file into ${subproj.buildDir}")
+
+                    copy {
+                        from rootProject.layout.buildDirectory.file("reports/koverMerged/xml/")
+                        include "report.xml"
+                        into subproj.layout.buildDirectory.file("reports/koverMerged/xml/")
+                    }
+                }
+        }
+    }
+}
+
+check.finalizedBy copyResultToSubprojects

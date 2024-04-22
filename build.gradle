@@ -1,0 +1,14 @@
+plugins {
+    id "base"
+    id "project.java-version"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+subprojects {
+    version = scmVersion.version
+    group "edu.aua"
+}

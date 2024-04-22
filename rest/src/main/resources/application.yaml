@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: aua-spotify-server
+  data:
+    mongodb:
+      auto-index-creation: off
+      uri: mongodb+srv://admin:Qyd0TaeyNvDQWQ7Z@capstone-cluster0.m0pwxyl.mongodb.net/spotify?appName=Capstone-Cluster0
+application:
+  auth:
+    jwt:
+      secret-key:
+        id: key-id-1
+        value: 17262d0dd2b5e36736b7ed51f4e6b238e9fa361970e887dfe9b3bfb2370db1dd
+    google:
+      client-id: 1071985243412-me9d42e13u7r4gdir9sj0jv01naqt918.apps.googleusercontent.com

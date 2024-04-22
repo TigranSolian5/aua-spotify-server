@@ -1,0 +1,16 @@
+plugins {
+    id "pl.allegro.tech.build.axion-release"
+}
+
+scmVersion {
+    tag {
+        prefix = "v"
+        versionSeparator = ""
+    }
+}
+
+project.version = scmVersion.version
+
+afterEvaluate {
+    logger.lifecycle('>> project.version: {}', project.version)
+}

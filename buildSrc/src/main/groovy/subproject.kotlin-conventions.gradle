@@ -1,0 +1,37 @@
+plugins {
+    id "org.jetbrains.kotlin.plugin.spring"
+    id "org.jetbrains.kotlin.jvm"
+    id "org.jlleitschuh.gradle.ktlint"
+    id "kotlin.log4j2"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url = "https://packages.confluent.io/maven"}
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+
+test {
+    useJUnitPlatform()
+    reports {
+        junitXml.required = true
+    }
+    testLogging {
+        events = ['failed']
+        exceptionFormat = 'full'
+        showStandardStreams = true
+        showExceptions = true
+        showStackTraces = true
+        showCauses = true
+    }
+    forkEvery = 0
+    maxParallelForks = 1
+}

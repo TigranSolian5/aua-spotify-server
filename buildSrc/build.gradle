@@ -1,0 +1,17 @@
+plugins {
+    id "groovy-gradle-plugin"
+}
+
+repositories {
+    gradlePluginPortal()
+    mavenLocal()
+    mavenCentral()
+    maven { url = "https://packages.confluent.io/maven"}
+}
+
+dependencies {
+    implementation libs.axion.release.plugin
+    implementation libs.ktlint.plugin
+    implementation libs.kotlin.gradle.plugin
+    implementation libs.kotlin.allopen.plugin
+}

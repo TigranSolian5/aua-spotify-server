@@ -1,0 +1,33 @@
+plugins {
+    id "subproject.kotlin-conventions"
+    id "subproject.kotlin-mapstruct"
+}
+
+dependencies {
+    implementation platform(libs.kotlin.dependencies)
+    implementation platform(libs.spring.boot.dependencies)
+
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8"
+    implementation 'io.projectreactor.kotlin:reactor-kotlin-extensions'
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+
+    implementation libs.google.api.client
+    implementation libs.jwt
+
+    api "org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
+    api "org.springframework.boot:spring-boot-starter-data-mongodb"
+    api "org.springframework.data:spring-data-mongodb"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
+
+    annotationProcessor libs.spring.boot.annotation.processor
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.apache.commons:commons-lang3"
+    testImplementation "org.assertj:assertj-core"
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.mockito.inline
+    testImplementation libs.mockk
+}

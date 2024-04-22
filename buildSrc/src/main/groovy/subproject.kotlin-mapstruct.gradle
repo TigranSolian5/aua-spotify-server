@@ -1,0 +1,27 @@
+plugins {
+    id "org.jetbrains.kotlin.kapt"
+}
+
+dependencies {
+    // mapstruct + kapt
+    kapt libs.mapstructProc
+    implementation libs.mapstruct
+}
+
+kapt {
+    // Fix errors that can occur if multiple annotation processors are used
+    // https://kotlinlang.org/docs/kapt.html#non-existent-type-correction
+    correctErrorTypes = true
+    arguments {
+        // Set Mapstruct Configuration options here
+        // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
+        // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
+        arg("mapstruct.defaultComponentModel", "spring")
+    }
+}
+
+// workaround for kapt to use Java17
+// see https://stackoverflow.com/questions/75109742/how-to-configure-kapt-to-generate-java17-java-stubs-in-android-gradle-build-file
+tasks.withType(org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask).configureEach {
+    kotlinOptions.jvmTarget = '17'
+}

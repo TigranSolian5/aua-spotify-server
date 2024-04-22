@@ -1,0 +1,3 @@
+rootProject.name = 'aua-spotify-server'
+include 'rest'
+include 'common'

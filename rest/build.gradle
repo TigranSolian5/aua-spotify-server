@@ -1,0 +1,45 @@
+plugins {
+    alias(libs.plugins.spring.boot)
+
+    id "subproject.kotlin-conventions"
+    id "subproject.kotlin-mapstruct"
+}
+
+dependencies {
+    implementation project(":common")
+    implementation platform(libs.kotlin.dependencies)
+    implementation platform(libs.spring.boot.dependencies)
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8"
+    implementation 'io.projectreactor.kotlin:reactor-kotlin-extensions'
+
+    implementation libs.google.api.client
+    implementation libs.jwt
+
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
+    implementation libs.springdoc.openapi.webflux.api
+    //https://github.com/springdoc/springdoc-openapi/issues/1977
+    modules {
+        module("io.swagger.core.v3:swagger-annotations") {
+            replacedBy("io.swagger.core.v3:swagger-annotations-jakarta")
+        }
+    }
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.apache.commons:commons-lang3"
+    testImplementation "org.assertj:assertj-core"
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.mockito.inline
+    testImplementation libs.mockk
+}
+
+bootJar {
+    mainClass = "com.picsart.spotifyserver.ApplicationKt"
+}
